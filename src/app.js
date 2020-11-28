@@ -14,7 +14,7 @@ require("./db")
 //configs
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
-app.set(
+app.engine(
   ".hbs",
   exphbs({
     defaultLayout: "main",
@@ -23,7 +23,7 @@ app.set(
     extname: ".hbs",
   })
 );
-app.set("view engine", ",hbs");
+app.set("view engine", ".hbs");
 
 //middleware
 app.use(morgan("dev"));

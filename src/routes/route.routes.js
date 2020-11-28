@@ -3,12 +3,12 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/user/signin", (req, res) => {
-  res.send("Hola estas en signin");
+router.get("/", (req, res) => {
+  res.render("index");
 });
 
-router.get("/user/signup", (req, res) => {
-  res.send("Hola estas en signup");
+router.get("/about", (req, res) => {
+  res.render("about");
 });
 
 module.exports = router;
