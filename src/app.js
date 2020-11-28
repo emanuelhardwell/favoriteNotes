@@ -9,6 +9,7 @@ const methodOverride = require("method-override");
 
 //initialize
 const app = express();
+require("./db")
 
 //configs
 app.set("port", process.env.PORT || 3000);
@@ -16,7 +17,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set(
   ".hbs",
   exphbs({
-    defaultLayout: main,
+    defaultLayout: "main",
     layoutsDir: path.join(app.get("views"), "layouts"),
     partialsDir: path.join(app.get("views"), "partials"),
     extname: ".hbs",
@@ -40,10 +41,16 @@ app.use(
 );
 
 //routes
+app.use(require("./routes/nota.routes"));
+app.use(require("./routes/route.routes"));
+app.use(require("./routes/user.routes"));
 
 // files static
+app.use(express.static(path.join(__dirname, "public")));
 
 // server listening
 app.listen(app.get("port"), () => {
-  console.log("server listening on port " + app.get("port"));
+  console.log(
+    "server listening on port ......................... " + app.get("port")
+  );
 });
