@@ -41,7 +41,7 @@ app.use(
 );
 
 //routes
-app.use(require("./routes/nota.routes"));
+app.use(require("./routes/note.routes"));
 app.use(require("./routes/route.routes"));
 app.use(require("./routes/user.routes"));
 

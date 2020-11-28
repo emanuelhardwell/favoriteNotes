@@ -3,4 +3,5 @@
 body {
   font-family: "Oswald", sans-serif;
   background: radial-gradient(rgb(85, 75, 75), rgb(26, 24, 24));
+  min-height: 100vh;
 }
