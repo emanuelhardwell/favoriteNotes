@@ -1,0 +1,8 @@
+express express-handlebars express-session method-override mongoose passport passport-local 
+bcryptjs connect-flash dotenv morgan
+
+nodemon -D
+ 
+================================================================
+method-override == nos sirve para que los formularios puedan enviar otros tipos de metodos
+como PUT DELETE 
