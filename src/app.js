@@ -6,10 +6,11 @@ const session = require("express-session");
 const exphbs = require("express-handlebars");
 const morgan = require("morgan");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
 
 //initialize
 const app = express();
-require("./db")
+require("./db");
 
 //configs
 app.set("port", process.env.PORT || 3000);
@@ -39,6 +40,16 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+// middleware flash
+app.use(flash());
+
+// global variables
+app.use((req, res, next) => {
+  res.locals.successMessage = req.flash("successMessage");
+  res.locals.errorMessage = req.flash("errorMessage");
+  next(); /* siempre poner el next */
+});
 
 //routes
 app.use(require("./routes/note.routes"));

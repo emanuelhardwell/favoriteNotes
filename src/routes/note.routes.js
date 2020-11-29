@@ -24,6 +24,7 @@ router.post("/note/add", async (req, res) => {
     /* crear nota */
     const newNote = new Note({ title, description });
     await newNote.save();
+    req.flash("successMessage", "Note added successfully");
     res.redirect("/note");
   }
 });
@@ -48,11 +49,13 @@ router.put("/note/edit/:id", async (req, res) => {
     title,
     description,
   }).lean();
+  req.flash("successMessage", "Note edited successfully");
   res.redirect("/note");
 });
 
 router.delete("/note/delete/:id", async (req, res) => {
   await Note.findByIdAndDelete(req.params.id).lean();
+  req.flash("successMessage", "Note deleted successfully");
   res.redirect("/note");
 });
 
