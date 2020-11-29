@@ -1,15 +1,6 @@
 {{!--  --}}
 {{!--  --}}
-{{#each errors}}
-<div class="container">
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>{{text}}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
-{{/each}}
+
 
 <div class="container mt-3">
     <div class="row">
@@ -21,10 +12,12 @@
                 <div class="card-body">
                     <form action="/note/add" method="post">
                         <div class="form-group">
-                            <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
+                            <input type="text" value="{{title}}" name="title" class="form-control" placeholder="Title"
+                                autofocus>
                         </div>
                         <div class="form-group">
-                            <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                            <textarea name="description" value="{{description}}" class="form-control"
+                                placeholder="Description"></textarea>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary btn-block">

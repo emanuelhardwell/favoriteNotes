@@ -1,0 +1,32 @@
+{{!--  --}}
+{{!--  --}}
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <h4 class="text-center">SignUp</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/user/signup" method="post">
+                        <div class="form-group">
+                            <input type="text" value="{{name}}" name="name" placeholder="Name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" value="{{email}}" name="email" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" value="{{password}}" name="password" placeholder="Password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" value="{{passwordConfirm}}" name="passwordConfirm" placeholder="Confirm Password" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
