@@ -24,18 +24,31 @@ router.post("/note/add", async (req, res) => {
     /* crear nota */
     const newNote = new Note({ title, description });
     await newNote.save();
-    res.redirect("/list");
+    res.redirect("/note");
   }
 });
 
-router.get("/list", async (req, res) => {
-  try {
-    const noteList = await Note.find();
-  res.render('notes/list', { note: noteList.toObject(), });
-  } catch (error) {
-    
-  }
-  
+router.get("/note", async (req, res) => {
+  /* try { */
+  const noteList = await Note.find().sort({ date: "desc" }).lean();
+  res.render("notes/list", { noteList });
+  /* } catch (error) {
+    console.log(error);
+  } */
+});
+
+router.get("/note/edit/:id", async (req, res) => {
+  const noteEdit = await Note.findById(req.params.id).lean();
+  res.render("notes/edit", { noteEdit });
+});
+
+router.put("/note/edit/:id", async (req, res) => {
+  const { title, description } = req.body;
+  await Note.findByIdAndUpdate(req.params.id, {
+    title,
+    description,
+  }).lean();
+  res.redirect("/note");
 });
 
 module.exports = router;
