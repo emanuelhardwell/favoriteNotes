@@ -7,13 +7,15 @@ const exphbs = require("express-handlebars");
 const morgan = require("morgan");
 const methodOverride = require("method-override");
 const flash = require("connect-flash");
+const passport = require("passport");
 
 //initialize
 const app = express();
 require("./db");
+require("./configs/passport");
 
 //configs
-app.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 7000);
 app.set("views", path.join(__dirname, "views"));
 app.engine(
   ".hbs",
@@ -32,7 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(express.json());
 
-// middleware PRO
+// middleware session
 app.use(
   session({
     secret: "hardwell",
@@ -41,6 +43,10 @@ app.use(
   })
 );
 
+// middleware passport
+app.use(passport.initialize());
+app.use(passport.session());
+
 // middleware flash
 app.use(flash());
 
@@ -48,6 +54,7 @@ app.use(flash());
 app.use((req, res, next) => {
   res.locals.successMessage = req.flash("successMessage");
   res.locals.errorMessage = req.flash("errorMessage");
+  res.locals.error = req.flash("error"); /* este es de passport */
   next(); /* siempre poner el next */
 });
 
