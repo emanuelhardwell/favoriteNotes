@@ -24,6 +24,7 @@ router.post("/note/add", isAuthenticated, async (req, res) => {
   } else {
     /* crear nota */
     const newNote = new Note({ title, description });
+    newNote.user = req.user.id;
     await newNote.save();
     req.flash("successMessage", "Note added successfully");
     res.redirect("/note");
@@ -32,7 +33,9 @@ router.post("/note/add", isAuthenticated, async (req, res) => {
 
 router.get("/note", isAuthenticated, async (req, res) => {
   /* try { */
-  const noteList = await Note.find().sort({ date: "desc" }).lean();
+  const noteList = await Note.find({ user: req.user.id })
+    .sort({ date: "desc" })
+    .lean();
   res.render("notes/list", { noteList });
   /* } catch (error) {
     console.log(error);
