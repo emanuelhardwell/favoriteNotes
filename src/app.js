@@ -55,6 +55,8 @@ app.use((req, res, next) => {
   res.locals.successMessage = req.flash("successMessage");
   res.locals.errorMessage = req.flash("errorMessage");
   res.locals.error = req.flash("error"); /* este es de passport */
+  res.locals.user =
+    req.user || null; /* almacena la información del usuario autenticado */
   next(); /* siempre poner el next */
 });
 
