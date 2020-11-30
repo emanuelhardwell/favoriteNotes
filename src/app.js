@@ -69,6 +69,11 @@ app.use(require("./routes/user.routes"));
 // files static
 app.use(express.static(path.join(__dirname, "public")));
 
+//404
+app.use((req, res) => {
+  res.status(404).render("404");
+});
+
 // server listening
 app.listen(app.get("port"), () => {
   console.log(
