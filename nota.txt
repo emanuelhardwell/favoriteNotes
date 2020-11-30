@@ -1,5 +1,5 @@
 express express-handlebars express-session method-override mongoose passport passport-local 
-bcryptjs connect-flash dotenv morgan
+bcryptjs connect-flash dotenv morgan timeago.js
 
 nodemon -D
  

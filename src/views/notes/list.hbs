@@ -9,6 +9,7 @@
                     <h4 class="card-title d-flex justify-content-between align-items-center">{{ title }} <a
                             href="/note/edit/{{_id}}"><i class="fas fa-edit"></i></a></h4>
                     <p>{{ description }}</p>
+                    <p class="text-muted">{{timeago date }}</p>
                     {{!-- form hidden --}}
                     <form action="/note/delete/{{_id}}?_method=DELETE" method="post">
                         <input type="hidden" name="_method" value="DELETE">
