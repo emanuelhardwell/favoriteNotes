@@ -13,7 +13,7 @@ const app = express();
 require("./db");
 
 //configs
-app.set("port", process.env.PORT || 4000);
+app.set("port", process.env.PORT || 5000);
 app.set("views", path.join(__dirname, "views"));
 app.engine(
   ".hbs",
