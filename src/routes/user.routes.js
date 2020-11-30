@@ -4,8 +4,9 @@ const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const User = require("../models/User");
+const { isNotAuthenticated } = require("../helpers/auth");
 
-router.get("/user/signup", (req, res) => {
+router.get("/user/signup", isNotAuthenticated, (req, res) => {
   res.render("users/signup");
 });
 
@@ -43,7 +44,7 @@ router.post("/user/signup", async (req, res) => {
   }
 });
 
-router.get("/user/signin", (req, res) => {
+router.get("/user/signin", isNotAuthenticated, (req, res) => {
   res.render("users/signin");
 });
 
