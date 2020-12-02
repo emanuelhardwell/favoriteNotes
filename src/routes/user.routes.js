@@ -13,14 +13,14 @@ router.get("/user/signup", isNotAuthenticated, (req, res) => {
 router.post("/user/signup", async (req, res) => {
   const { name, email, password, passwordConfirm } = req.body;
   let errors = [];
-  if (name < 4) {
-    errors.push({ text: "The name is empty" });
+  if (!name || !email || !password || !passwordConfirm) {
+    errors.push({ text: "Please enter all fields" });
   }
   if (password != passwordConfirm) {
-    errors.push({ text: "The password is not math" });
+    errors.push({ text: "Passwords do not match" });
   }
-  if (password < 5) {
-    errors.push({ text: "The password is very small" });
+  if (password < 6) {
+    errors.push({ text: "Password must be at least 6 characters" });
   }
   if (errors.length > 0) {
     res.render("users/signup", {
@@ -33,14 +33,21 @@ router.post("/user/signup", async (req, res) => {
   } else {
     const searchEmail = await User.findOne({ email: email });
     if (searchEmail) {
-      req.flash("errorMessage", "The email is already associated");
-      res.redirect("/user/signup");
+      errors.push({ text: "Email already exists" });
+      res.render("users/signup", {
+        errors,
+        name,
+        email,
+        password,
+        passwordConfirm,
+      });
+    } else {
+      const newUser = new User({ name, email, password });
+      newUser.password = await newUser.encryptPassword(password);
+      await newUser.save();
+      req.flash("successMessage", "You are registered successfully");
+      res.redirect("/user/signin");
     }
-    const newUser = new User({ name, email, password });
-    newUser.password = await newUser.encryptPassword(password);
-    await newUser.save();
-    req.flash("successMessage", "You are registered successfully");
-    res.redirect("/user/signin");
   }
 });
 
